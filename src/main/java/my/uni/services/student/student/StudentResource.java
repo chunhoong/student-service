@@ -22,7 +22,7 @@ public class StudentResource {
     }
 
     @PostMapping
-    public void registerStudent(@Valid NewStudent student) {
+    public void registerStudent(@Valid @RequestBody NewStudent student) {
         logger.debug("registerStudent start");
         this.studentSvc.registerStudent(student);
     }
@@ -40,7 +40,7 @@ public class StudentResource {
     }
 
     @PutMapping
-    public void updateStudent(@Valid ExistingStudent student) {
+    public void updateStudent(@Valid @RequestBody ExistingStudent student) {
         logger.debug("updateStudent start");
         this.studentSvc.updateStudent(student);
     }
