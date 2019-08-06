@@ -1,5 +1,10 @@
+import { Course } from './course';
+
 export interface Student {
 
-  studentId: string;
+  studentId?: string;
+  firstName: string;
+  lastName: string;
+  courses: Course[];
 
 }
