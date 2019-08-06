@@ -1,1 +1,26 @@
-<p>dashboard works!</p>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Student ID</th>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Course</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let student of students$ | async; index as i">
+      <tr>
+        <th scope="row">{{i + 1}}</th>
+        <td>{{student.studentId}}</td>
+        <td>{{student.firstName}}</td>
+        <td>{{student.lastName}}</td>
+        <td>
+          <ng-container *ngFor="let course of student.courses; last as isLast">
+            {{course.courseName}} <span *ngIf="!isLast">, </span>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
