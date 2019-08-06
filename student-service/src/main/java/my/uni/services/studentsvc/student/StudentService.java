@@ -1,6 +1,6 @@
-package my.uni.services.student.student;
+package my.uni.services.studentsvc.student;
 
-import my.uni.services.student.course.CourseRegistryRepository;
+import my.uni.services.studentsvc.course.CourseRegistryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

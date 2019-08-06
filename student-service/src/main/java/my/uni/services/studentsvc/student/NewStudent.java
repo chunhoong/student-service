@@ -1,11 +1,11 @@
-package my.uni.services.student.student;
+package my.uni.services.studentsvc.student;
 
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
 @Data
-class ExistingStudent {
+class NewStudent {
 
     @NotBlank(message = "First name cannot be empty")
     private String firstName;
@@ -14,5 +14,3 @@ class ExistingStudent {
     private String lastName;
 
 }
-
-

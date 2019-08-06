@@ -1,4 +1,4 @@
-package my.uni.services.student;
+package my.uni.services.studentsvc;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class StudentApplicationTests {
+public class StudentServiceApplicationTests {
 
 	@Test
 	public void contextLoads() {

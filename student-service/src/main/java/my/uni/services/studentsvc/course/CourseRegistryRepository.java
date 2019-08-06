@@ -1,4 +1,4 @@
-package my.uni.services.student.course;
+package my.uni.services.studentsvc.course;
 
 import org.springframework.data.repository.CrudRepository;
 

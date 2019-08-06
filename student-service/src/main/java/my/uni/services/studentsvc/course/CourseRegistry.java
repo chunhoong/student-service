@@ -1,4 +1,4 @@
-package my.uni.services.student.course;
+package my.uni.services.studentsvc.course;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

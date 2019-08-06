@@ -1,13 +1,13 @@
-package my.uni.services.student;
+package my.uni.services.studentsvc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StudentApplication {
+public class StudentServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StudentApplication.class, args);
+		SpringApplication.run(StudentServiceApplication.class, args);
 	}
 
 }

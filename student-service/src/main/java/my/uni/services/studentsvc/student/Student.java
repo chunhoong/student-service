@@ -1,4 +1,4 @@
-package my.uni.services.student.course;
+package my.uni.services.studentsvc.student;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Data
 @Accessors(chain = true)
 @Entity
-@Table(name = "courses")
-class Course {
+@Table(name = "students")
+public class Student {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -18,12 +18,12 @@ class Course {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-    private String courseId;
+    private String studentId;
 
-    @Column(name = "course_name")
-    private String courseName;
+    @Column(name = "first_name")
+    private String firstName;
 
-    @Column(name = "course_description")
-    private String courseDescription;
+    @Column(name = "last_name")
+    private String lastName;
 
 }
