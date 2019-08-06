@@ -5,10 +5,10 @@ import { StudentService } from '../student.service';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  templateUrl: './dashboard.page.html',
+  styleUrls: ['./dashboard.page.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardPage implements OnInit {
 
   students$: Observable<Student[]> = of([
     {
@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
       ]
     },
     {
-      studentId: 'A142188',
+      studentId: 'A142199',
       firstName: 'Lim',
       lastName: 'Chun Hoong',
       courses: [
@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
       ]
     },
     {
-      studentId: 'A142188',
+      studentId: 'A142208',
       firstName: 'Lim',
       lastName: 'Chun Hoong',
       courses: [

@@ -12,7 +12,9 @@
     <tbody *ngFor="let student of students$ | async; index as i">
       <tr>
         <th scope="row">{{i + 1}}</th>
-        <td>{{student.studentId}}</td>
+        <a [routerLink]="['/students', student.studentId]" routerLinkActive="active" [state]="student">
+          <td>{{student.studentId}}</td>
+        </a>
         <td>{{student.firstName}}</td>
         <td>{{student.lastName}}</td>
         <td>

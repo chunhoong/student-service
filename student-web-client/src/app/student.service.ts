@@ -7,7 +7,7 @@ import { Student } from './student';
 })
 export class StudentService {
 
-  private static readonly baseUrl = 'http://localhost/students'
+  private static readonly baseUrl = 'http://localhost/api/students'
 
   constructor(private http: HttpClient) { }
 
