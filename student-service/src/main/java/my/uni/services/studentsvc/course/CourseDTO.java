@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 public class CourseDTO {
 
     private String courseId;
+    private String courseCode;
     private String courseName;
     private String courseDescription;
 

@@ -16,6 +16,9 @@
             <column name="id" type="varchar(36)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="course_code" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
             <column name="course_name" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>

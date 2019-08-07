@@ -21,6 +21,9 @@ class Course {
     )
     private String courseId;
 
+    @Column(name = "course_code")
+    private String courseCode;
+
     @Column(name = "course_name")
     private String courseName;
 

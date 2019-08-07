@@ -18,6 +18,7 @@ public class CourseService {
         return courseRepo.findAll().stream()
                 .map(c -> new CourseDTO()
                         .setCourseId(c.getCourseId())
+                        .setCourseCode(c.getCourseCode())
                         .setCourseName(c.getCourseName())
                         .setCourseDescription(c.getCourseDescription())
                 )
