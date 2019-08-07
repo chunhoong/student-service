@@ -1,7 +1,9 @@
-package my.uni.services.studentsvc.course;
+package my.uni.services.studentsvc.courseregistry;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import my.uni.services.studentsvc.course.Course;
+import my.uni.services.studentsvc.student.Student;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 class CourseRegistry {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
@@ -23,11 +26,13 @@ class CourseRegistry {
     )
     private String courseRegistryId;
 
-    @Column(name = "student_id")
-    private String studentId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    private Student student;
 
-    @Column(name = "course_id")
-    private String courseId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    private Course course;
 
     @Column(name = "created_at")
     @CreationTimestamp

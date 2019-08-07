@@ -1,8 +1,6 @@
-package my.uni.services.studentsvc.course;
+package my.uni.services.studentsvc.courseregistry;
 
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 public interface CourseRegistryRepository extends CrudRepository<CourseRegistry, String> {
 }

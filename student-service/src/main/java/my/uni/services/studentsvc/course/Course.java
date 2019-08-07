@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Accessors(chain = true)
 @Entity
 @Table(name = "courses")
-class Course {
+public class Course {
 
     @Id
     @Column(name = "id")
