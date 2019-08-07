@@ -41,6 +41,46 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="3" author="chunhoong">
+        <createTable tableName="course_registries">
+            <column name="id" type="varchar(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="student_id" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="course_id" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME(6)" defaultValueComputed="NOW(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME(6)" defaultValueComputed="NOW(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="student_id"
+                                 baseTableName="course_registries"
+                                 constraintName="fk_course_registries_student"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="students"
+        />
+        <addForeignKeyConstraint baseColumnNames="course_id"
+                                 baseTableName="course_registries"
+                                 constraintName="fk_course_registries_course"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="courses"
+        />
+    </changeSet>
+
 
 </databaseChangeLog>
 
