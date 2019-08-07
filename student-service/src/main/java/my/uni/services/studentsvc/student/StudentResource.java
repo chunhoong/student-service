@@ -39,13 +39,13 @@ public class StudentResource {
         return this.studentSvc.findStudentById(studentId);
     }
 
-    @PutMapping
-    public void updateStudent(@Valid @RequestBody ExistingStudent student) {
+    @PutMapping("/{studentId}")
+    public void updateStudent(@PathVariable String studentId, @Valid @RequestBody ExistingStudent student) {
         logger.debug("updateStudent start");
-        this.studentSvc.updateStudent(student);
+        this.studentSvc.updateStudent(studentId, student);
     }
 
-    @DeleteMapping("/{studentId")
+    @DeleteMapping("/{studentId}")
     public void removeStudent(@PathVariable String studentId) {
         logger.debug("removeStudent -> start");
         this.studentSvc.removeStudent(studentId);
