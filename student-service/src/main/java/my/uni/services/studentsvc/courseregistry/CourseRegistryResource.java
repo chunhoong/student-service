@@ -18,7 +18,7 @@ public class CourseRegistryResource {
     }
 
     @PostMapping
-    public void registerCourse(@RequestBody @Valid NewCourseRegistry courseRegistry) {
+    public void registerCourse(@RequestBody @Valid CourseRegistryForm courseRegistry) {
         courseRegistrySvc.registerCourse(courseRegistry);
     }
 

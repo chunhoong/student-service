@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-class NewCourseRegistry {
+class CourseRegistryForm {
 
     @NotBlank(message = "Course id cannot be empty")
     private String courseId;

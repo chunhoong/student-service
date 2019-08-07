@@ -32,7 +32,7 @@ public class StudentService {
         this.courseRepo = courseRepo;
     }
 
-    void registerStudent(NewStudent student) {
+    void registerStudent(StudentForm student) {
         studentRepo.save(new Student()
                 .setFirstName(student.getFirstName())
                 .setLastName(student.getLastName())
@@ -61,7 +61,7 @@ public class StudentService {
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
-    void updateStudent(String studentId, ExistingStudent student) {
+    void updateStudent(String studentId, StudentForm student) {
         studentRepo.findById(studentId).map(s ->
                 studentRepo.save(s
                         .setFirstName(student.getFirstName())

@@ -30,7 +30,7 @@ public class CourseRegistryService {
         this.studentRepo = studentRepo;
     }
 
-    void registerCourse(NewCourseRegistry courseRegistry) {
+    void registerCourse(CourseRegistryForm courseRegistry) {
         Course c = courseRepo.findById(courseRegistry.getCourseId()).orElseThrow(ResourceNotFoundException::new);
         Student s = studentRepo.findById(courseRegistry.getStudentId()).orElseThrow(ResourceNotFoundException::new);
         this.courseRegistryRepo.save(new CourseRegistry().setCourse(c).setStudent(s));
