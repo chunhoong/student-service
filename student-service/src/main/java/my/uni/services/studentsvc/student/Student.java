@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class Student {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/course-registries")
@@ -19,6 +20,11 @@ public class CourseRegistryResource {
     @PostMapping
     public void registerCourse(@RequestBody @Valid NewCourseRegistry courseRegistry) {
         courseRegistrySvc.registerCourse(courseRegistry);
+    }
+
+    @GetMapping()
+    public List<CourseRegistryDTO> findRegisteredCoursesByStudentId(@RequestParam String studentId) {
+        return courseRegistrySvc.findRegisteredCoursesByStudentId(studentId);
     }
 
 }

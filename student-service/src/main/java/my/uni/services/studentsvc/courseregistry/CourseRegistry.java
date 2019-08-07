@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 @Entity
 @Table(name = "course_registries")
-class CourseRegistry {
+public class CourseRegistry {
 
     @Id
     @Column(name = "id")

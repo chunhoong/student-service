@@ -28,14 +28,14 @@ public class StudentResource {
     }
 
     @GetMapping
-    public List<StudentDTO> listStudentsByCourse(@RequestParam("courseId") String courseId) {
-        logger.debug("listStudentsByCourse start -> courseId " + courseId);
-        return this.studentSvc.listStudentsByCourse(courseId);
+    public List<StudentDTO> listStudentsByCourse(@RequestParam("courseCode") String courseCode) {
+        logger.debug("listStudentsByCourse start -> courseCode: {}", courseCode);
+        return this.studentSvc.listStudentsByCourse(courseCode);
     }
 
     @GetMapping(value = "/{studentId}")
     public StudentDTO findStudentById(@PathVariable String studentId) {
-        logger.debug("findStudentById start -> studentId " + studentId);
+        logger.debug("findStudentById start -> studentId: {} ", studentId);
         return this.studentSvc.findStudentById(studentId);
     }
 
