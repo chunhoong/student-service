@@ -33,7 +33,7 @@
             <column name="id" type="varchar(36)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="first_name" type="varchar(10)">
+            <column name="first_name" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="last_name" type="varchar(100)">
