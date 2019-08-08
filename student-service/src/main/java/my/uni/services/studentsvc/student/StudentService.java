@@ -32,11 +32,15 @@ public class StudentService {
         this.courseRepo = courseRepo;
     }
 
-    void registerStudent(StudentForm student) {
-        studentRepo.save(new Student()
+    StudentDTO registerStudent(StudentForm student) {
+        Student s = new Student()
                 .setFirstName(student.getFirstName())
-                .setLastName(student.getLastName())
-        );
+                .setLastName(student.getLastName());
+        s = studentRepo.saveAndFlush(s);
+        return new StudentDTO()
+                .setStudentId(s.getStudentId())
+                .setFirstName(s.getFirstName())
+                .setLastName(s.getLastName());
     }
 
     List<StudentDTO> listStudentsByCourse(String courseCode) {

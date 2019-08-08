@@ -22,9 +22,9 @@ public class StudentResource {
     }
 
     @PostMapping
-    public void registerStudent(@Valid @RequestBody StudentForm student) {
+    public StudentDTO registerStudent(@Valid @RequestBody StudentForm student) {
         logger.debug("registerStudent start");
-        this.studentSvc.registerStudent(student);
+        return this.studentSvc.registerStudent(student);
     }
 
     @GetMapping
