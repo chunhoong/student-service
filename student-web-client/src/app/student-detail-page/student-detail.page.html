@@ -10,26 +10,50 @@
       <label for="firstName">First name</label>
       <input type="text" class="form-control" id="firstName" placeholder="Chun Hoong">
     </div>
+    
     <div class="form-group">
       <label for="lastName">Last name</label>
       <input type="text" class="form-control" id="lastName" placeholder="Lim">
     </div>
-    <div class="form-group">
+    
+    <!-- <div class="form-group">
       <label for="courses">Courses</label>
-      <!-- <select multiple class="form-control" id="courses">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select> -->
       <div>
-        <div class="spinner-border spinner-border-sm text-primary" role="status">
-          <span class="sr-only">Loading...</span>
+        <div *ngIf="availableCourses$ | async as availableCourses; else loading">
+          <ng-container *ngFor="let course of availableCourses">
+            <p>{{course.courseCode}} {{course.courseName}}</p>
+          </ng-container>
         </div>
-        <span>&nbsp;&nbsp;Loading courses...</span>
+        <ng-template #loading>
+            <div class="spinner-border spinner-border-sm text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+          <span>&nbsp;&nbsp;Loading courses...</span>
+        </ng-template>
+      </div>  
+    </div> -->
+
+    <div class="form-group">
+        <label for="courses">Registered courses</label>
+        <div>
+          <div *ngIf="registeredCourses$ | async as registeredCourses; else loading">
+            <ng-container *ngFor="let registeredCourse of registeredCourses">
+              <p>
+                <span class="badge badge-primary">
+                  {{registeredCourse.course.courseCode}} {{registeredCourse.course.courseName}}
+                </span>
+              </p>
+            </ng-container>
+          </div>
+          <ng-template #loading>
+              <div class="spinner-border spinner-border-sm text-primary" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+            <span>&nbsp;&nbsp;Loading courses...</span>
+          </ng-template>
+        </div>
       </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
+
+    <button type="submit" class="btn btn-primary">Update</button>
   </form>
 </div>

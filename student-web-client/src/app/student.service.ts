@@ -7,7 +7,7 @@ import { Student } from './student';
 })
 export class StudentService {
 
-  private static readonly baseUrl = 'http://localhost/api/students'
+  private static readonly baseUrl = 'http://localhost:8443/api/students'
 
   constructor(private http: HttpClient) { }
 
@@ -15,8 +15,8 @@ export class StudentService {
     return this.http.get<any>(StudentService.baseUrl);
   }
 
-  searchStudentsByCourse(courseNameKeyword: string) {
-    return this.http.get<any>(`${StudentService.baseUrl}?courseName=${courseNameKeyword}`);
+  fetchStudentsByCourse(courseName: string) {
+    return this.http.get<Student[]>(StudentService.baseUrl + '?courseName=' + courseName);
   }
 
   registerStudent(student: Student) {
@@ -24,7 +24,7 @@ export class StudentService {
   }
 
   updateStudent(student: Student) {
-    return this.http.put(`${StudentService.baseUrl}/${student.studentId}`, student);
+    return this.http.put(StudentService.baseUrl + '/' + student.studentId, student);
   }
 
   removeStudent(studentId: string) {
