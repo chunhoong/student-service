@@ -1,25 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { CoursesService } from '../courses.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Course } from '../course';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { StudentService } from '../student.service';
+import { CoursesService } from '../courses.service';
 import { Student } from '../student';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'app-student-registration-page',
   templateUrl: './student-registration-page.html',
   styleUrls: ['./student-registration-page.css']
 })
-export class StudentRegistrationPage implements OnInit, OnDestroy {
+export class StudentRegistrationPage implements OnInit {
 
   availableCourses: Course[];
   studentForm: FormGroup;
-  registrationSubscription: Subscription;
   coursesToBeRegistered: string[] = [];
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private courseSvc: CoursesService,
     private studentSvc: StudentService
   ) { }
@@ -31,10 +31,6 @@ export class StudentRegistrationPage implements OnInit, OnDestroy {
     });
 
     this.fetchAvailableCourses();
-  }
-
-  ngOnDestroy() {
-    this.registrationSubscription.unsubscribe();
   }
 
   fetchAvailableCourses() {
@@ -60,6 +56,7 @@ export class StudentRegistrationPage implements OnInit, OnDestroy {
           await this.courseSvc.registerCourse(this.coursesToBeRegistered[i], s.studentId).toPromise();
         }
         alert(`Registration complete`);
+        this.router.navigateByUrl('/');
       }
       catch (e) {
         alert(e);

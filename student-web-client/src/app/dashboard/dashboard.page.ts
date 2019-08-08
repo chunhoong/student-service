@@ -55,7 +55,7 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   registerStudent() {
-    this.router.navigateByUrl('/students/new')
+    this.router.navigateByUrl('/students/new');
   }
 
   removeStudent(student: Student) {
