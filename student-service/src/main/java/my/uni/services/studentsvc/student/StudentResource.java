@@ -28,9 +28,13 @@ public class StudentResource {
     }
 
     @GetMapping
-    public List<StudentDTO> listStudentsByCourse(@RequestParam("courseCode") String courseCode) {
-        logger.debug("listStudentsByCourse start -> courseCode: {}", courseCode);
-        return this.studentSvc.listStudentsByCourse(courseCode);
+    public List<StudentDTO> listStudents(@RequestParam(name = "courseCode", defaultValue = "") String courseCode) {
+        if (courseCode.equals("")) {
+            logger.debug("listStudents start");
+        } else {
+            logger.debug("listStudents start: -> Course: {}", courseCode);
+        }
+        return courseCode.equals("") ? this.studentSvc.listStudents() : this.studentSvc.listStudentsByCourse(courseCode);
     }
 
     @GetMapping(value = "/{studentId}")

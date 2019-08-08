@@ -51,6 +51,15 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
+    List<StudentDTO> listStudents() {
+        return studentRepo.findAll().stream()
+                .map(s -> new StudentDTO()
+                        .setStudentId(s.getStudentId())
+                        .setFirstName(s.getFirstName())
+                        .setLastName(s.getLastName())
+                ).collect(Collectors.toList());
+    }
+
     StudentDTO findStudentById(String studentId) {
         return studentRepo.findById(studentId)
                 .map(s -> new StudentDTO()
