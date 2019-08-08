@@ -11,21 +11,26 @@
     </div>
 
     <div class="form-group">
-        <label for="courses">Courses</label>
-        <div>
-          <div *ngIf="availableCourses$ | async as availableCourses; else loading">
-            <ng-container *ngFor="let course of availableCourses">
-              <p>{{course.courseCode}} {{course.courseName}}</p>
-            </ng-container>
+      <label for="courses">Courses</label>
+      <div>
+        <div *ngIf="availableCourses; else loading">
+          <ng-container *ngFor="let course of availableCourses">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" [id]="course.courseCode" (change)="updateCoursesTobeRegistered(course.courseId)">
+              <label class="custom-control-label" [for]="course.courseCode">
+                {{course.courseCode}} {{course.courseName}}
+              </label>
+            </div>
+          </ng-container>
+        </div>
+        <ng-template #loading>
+          <div class="spinner-border spinner-border-sm text-primary" role="status">
+            <span class="sr-only">Loading...</span>
           </div>
-          <ng-template #loading>
-              <div class="spinner-border spinner-border-sm text-primary" role="status">
-                  <span class="sr-only">Loading...</span>
-                </div>
-            <span>&nbsp;&nbsp;Loading courses...</span>
-          </ng-template>
-        </div>  
+          <span>&nbsp;&nbsp;Loading courses...</span>
+        </ng-template>
       </div>
+    </div>
 
     <button type="submit" class="btn btn-primary">Register</button>
   </form>

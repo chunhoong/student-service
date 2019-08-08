@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { CoursesService } from '../courses.service';
 import { Course } from '../course';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { StudentService } from '../student.service';
 
 @Component({
@@ -12,9 +12,10 @@ import { StudentService } from '../student.service';
 })
 export class StudentRegistrationPage implements OnInit, OnDestroy {
 
-  availableCourses$: Observable<Course[]>;
+  availableCourses: Course[];
   studentForm: FormGroup;
   registrationSubscription: Subscription;
+  coursesToBeRegistered: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -23,15 +24,25 @@ export class StudentRegistrationPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.availableCourses$ = this.courseSvc.fetchAvailableCourses();
     this.studentForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required]
     });
+
+    this.fetchAvailableCourses();
   }
 
   ngOnDestroy() {
     this.registrationSubscription.unsubscribe();
+  }
+
+  fetchAvailableCourses() {
+    this.courseSvc.fetchAvailableCourses()
+      .subscribe(
+        availableCourses => {
+          this.availableCourses = availableCourses;
+        }
+      );
   }
 
   onRegister() {
@@ -48,6 +59,16 @@ export class StudentRegistrationPage implements OnInit, OnDestroy {
           }
         );
     }
+  }
+
+  updateCoursesTobeRegistered(courseCode: string) {
+    console.log(`CoursesToBeRegistered[before]: ${JSON.stringify(this.coursesToBeRegistered)}`);
+    if (this.coursesToBeRegistered.includes(courseCode)) {
+      this.coursesToBeRegistered = this.coursesToBeRegistered.filter(c => c !== courseCode);
+    } else {
+      this.coursesToBeRegistered.push(courseCode);
+    }
+    console.log(`CoursesToBeRegistered[after]: ${JSON.stringify(this.coursesToBeRegistered)}`);
   }
 
 }
