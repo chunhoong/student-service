@@ -22,4 +22,8 @@ export class CoursesService {
     return this.http.get<CourseRegistry[]>(CoursesService.courseRegistriesBaseUrl + '?studentId=' + studentId);
   }
 
+  removeRegisteredCoursesByStudentId(studentId: string): Observable<void> {
+    return this.http.delete<void>(CoursesService.courseRegistriesBaseUrl + '?studentId=' + studentId)
+  }
+
 }

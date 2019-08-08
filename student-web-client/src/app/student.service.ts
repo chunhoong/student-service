@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { switchMap } from 'rxjs/operators';
+import { CoursesService } from './courses.service';
 import { Student } from './student';
 
 @Injectable({
@@ -9,7 +11,7 @@ export class StudentService {
 
   private static readonly baseUrl = 'http://localhost:8443/api/students'
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private courseSvc: CoursesService) { }
 
   fetchStudents() {
     return this.http.get<any>(StudentService.baseUrl);
@@ -27,7 +29,12 @@ export class StudentService {
     return this.http.put(StudentService.baseUrl + '/' + student.studentId, student);
   }
 
-  removeStudent(studentId: string) {
+  removeStudentAndRegisteredCourses(studentId: string) {
+    return this.courseSvc.removeRegisteredCoursesByStudentId(studentId)
+      .pipe(switchMap(() => this.removeStudent(studentId)));
+  }
+
+  private removeStudent(studentId: string) {
     return this.http.delete(`${StudentService.baseUrl}/${studentId}`);
   }
 

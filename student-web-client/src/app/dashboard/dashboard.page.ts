@@ -26,7 +26,7 @@ export class DashboardPage implements OnInit {
   removeStudent(student: Student) {
     let hasConfirmed = window.confirm(`${student.firstName} and his/her related records will be removed. Do you want to continue?`);
     if (hasConfirmed) {
-      this.studentSvc.removeStudent(student.studentId)
+      this.studentSvc.removeStudentAndRegisteredCourses(student.studentId)
         .subscribe(
           () => {
             alert(`${student.firstName} and his/her related records is successfully removed`);
