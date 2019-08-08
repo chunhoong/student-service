@@ -22,9 +22,14 @@ public class CourseRegistryResource {
         courseRegistrySvc.registerCourse(courseRegistry);
     }
 
-    @GetMapping()
+    @GetMapping
     public List<CourseRegistryDTO> findRegisteredCoursesByStudentId(@RequestParam String studentId) {
         return courseRegistrySvc.findRegisteredCoursesByStudentId(studentId);
+    }
+
+    @DeleteMapping
+    public void removeRegisteredCourseByStudentId(@RequestParam String studentId) {
+        courseRegistrySvc.removeRegisteredCourseByStudentId(studentId);
     }
 
 }

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,6 +53,15 @@ public class CourseRegistryService {
                             .setCourse(course);
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    void removeRegisteredCourseByStudentId(String studentId) {
+        logger.debug("Attempt to remove registered course by student {}", studentId);
+        Student s = studentRepo.findById(studentId).orElseThrow(ResourceNotFoundException::new);
+        logger.debug("Student profile of {} detected: {}", studentId, s);
+        logger.debug("Start course registry removal.");
+        courseRegistryRepo.deleteByStudent(s);
     }
 
 }
