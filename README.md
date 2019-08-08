@@ -15,8 +15,6 @@ $ ./gradlew build
 $ ./gradlew bootRun
 ```
 
-By default the web service is running on port 8443, please customize at `application.properties`.
-
 ---
 
 ### student-web-client
