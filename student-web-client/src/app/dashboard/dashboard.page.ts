@@ -1,22 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Student } from '../student';
 import { StudentService } from '../student.service';
-import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.css']
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit, OnDestroy {
 
-  students$: Observable<Student[]>;
+  students: Student[] = [];
+  searchStudentForm: FormGroup;
+  fetchStudentSubscription: Subscription;
+  searchStudentSubsription: Subscription;
 
-  constructor(private router: Router, private studentSvc: StudentService) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private studentSvc: StudentService
+  ) { }
 
   ngOnInit() {
-    this.students$ = this.studentSvc.fetchStudents();
+    this.searchStudentForm = this.fb.group({
+      courseCode: ['', Validators.required]
+    });
+    this.fetchStudent();
+  }
+
+  ngOnDestroy() {
+    this.fetchStudentSubscription.unsubscribe();
+    if (this.searchStudentSubsription) {
+      this.searchStudentSubsription.unsubscribe();
+    }
+  }
+
+  searchStudentByCourse(courseCode: string) {
+    if (!this.searchStudentForm.valid) {
+      alert('Please enter a valid course ID');
+    }
+
+    this.searchStudentSubsription = this.studentSvc.fetchStudentsByCourse(
+      this.searchStudentForm.get('courseCode').value
+    ).subscribe(
+      students => {
+        this.students = students;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   registerStudent() {
@@ -36,6 +71,23 @@ export class DashboardPage implements OnInit {
           }
         )
     }
+  }
+
+  fetchStudent() {
+    this.fetchStudentSubscription = this.studentSvc.fetchStudents()
+      .subscribe(
+        students => {
+          this.students = students;
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+  resetFormAndList() {
+    this.searchStudentForm.patchValue({ courseCode: '' });
+    this.fetchStudent();
   }
 
 }

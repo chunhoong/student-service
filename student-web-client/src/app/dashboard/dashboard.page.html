@@ -1,32 +1,48 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <form style="width: 100%" [formGroup]="searchStudentForm" (ngSubmit)="searchStudentByCourse()">
+      <div class="row">
+        <div class="col-9">
+          <input type="text" class="form-control" placeholder="Course ID. such as: TR2482" formControlName="courseCode">
+        </div>  
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-2">Search</button>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary mb-2" (click)="resetFormAndList()">Clear</button>
+          </div>
+      </div>
+    </form>
+  </div>
+</nav>
+
 <div class="container">
-  <ng-container *ngIf="students$ | async as students">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Student ID</th>
-          <th scope="col">First name</th>
-          <th scope="col">Last name</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let student of students; index as i">
-        <tr>
-          <th scope="row">{{i + 1}}</th>
-          <a [routerLink]="['/students', student.studentId]" routerLinkActive="active" [state]="student">
-            <td>{{student.studentId}}</td>
-          </a>
-          <td>{{student.firstName}}</td>
-          <td>{{student.lastName}}</td>
-          <td>
-            <button type="button" class="btn btn-danger btn-sm" (click)="removeStudent(student)">
-              Remove
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </ng-container>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Student ID</th>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let student of students; index as i">
+      <tr>
+        <th scope="row">{{i + 1}}</th>
+        <a [routerLink]="['/students', student.studentId]" routerLinkActive="active" [state]="student">
+          <td>{{student.studentId}}</td>
+        </a>
+        <td>{{student.firstName}}</td>
+        <td>{{student.lastName}}</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-sm" (click)="removeStudent(student)">
+            Remove
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
   <button type="button" class="btn btn-primary" (click)="registerStudent()">Register</button>
 </div>

@@ -17,8 +17,8 @@ export class StudentService {
     return this.http.get<any>(StudentService.baseUrl);
   }
 
-  fetchStudentsByCourse(courseName: string) {
-    return this.http.get<Student[]>(StudentService.baseUrl + '?courseName=' + courseName);
+  fetchStudentsByCourse(courseCode: string) {
+    return this.http.get<Student[]>(StudentService.baseUrl + '?courseCode=' + courseCode);
   }
 
   registerStudent(student: Student) {

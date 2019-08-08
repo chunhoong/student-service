@@ -22,6 +22,7 @@ export class StudentDetailPage implements OnInit, OnDestroy {
   availableCourses$: Observable<Course[]>
   registeredCourses$: Observable<CourseRegistry[]>;
   fetchStudentDetailSubscription: Subscription;
+  updateStudentSubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -43,6 +44,9 @@ export class StudentDetailPage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.fetchStudentDetailSubscription.unsubscribe();
+    if (this.updateStudentSubscription) {
+      this.updateStudentSubscription.unsubscribe();
+    }
   }
 
   fetchStudentDetail() {
