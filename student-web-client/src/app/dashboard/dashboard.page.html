@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container *ngIf="students$ | async as students; else showMessage">
+  <ng-container *ngIf="students$ | async as students">
     <table class="table">
       <thead>
         <tr>
@@ -27,10 +27,6 @@
       </tbody>
     </table>
   </ng-container>
-
-  <ng-template #showMessage>
-    There are no students currently. Create a record by clicking register button.
-  </ng-template>
 
   <button type="button" class="btn btn-primary" (click)="registerStudent()">Register</button>
 </div>

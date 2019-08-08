@@ -26,7 +26,8 @@ export class StudentService {
   }
 
   updateStudent(student: Student) {
-    return this.http.put(StudentService.baseUrl + '/' + student.studentId, student);
+    const { studentId, ...others} = student; 
+    return this.http.put(StudentService.baseUrl + '/' + studentId, others);
   }
 
   removeStudentAndRegisteredCourses(studentId: string) {

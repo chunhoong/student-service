@@ -1,58 +1,36 @@
 <div class="container">
-  <!-- To debug routerLink -->
-  <!-- <ng-container *ngIf="state$ | async as student">
-    {{student.studentId}}
-    {{student.firstName}}
-    {{student.lastName}}
-  </ng-container> -->
-  <form>
+  <form [formGroup]="studentForm" (ngSubmit)="updateStudent()">
     <div class="form-group">
       <label for="firstName">First name</label>
-      <input type="text" class="form-control" id="firstName" placeholder="Chun Hoong">
+      <input type="text" class="form-control" id="firstName" placeholder="Chun Hoong" formControlName="firstName">
     </div>
-    
-    <div class="form-group">
-      <label for="lastName">Last name</label>
-      <input type="text" class="form-control" id="lastName" placeholder="Lim">
-    </div>
-    
-    <!-- <div class="form-group">
-      <label for="courses">Courses</label>
-      <div>
-        <div *ngIf="availableCourses$ | async as availableCourses; else loading">
-          <ng-container *ngFor="let course of availableCourses">
-            <p>{{course.courseCode}} {{course.courseName}}</p>
-          </ng-container>
-        </div>
-        <ng-template #loading>
-            <div class="spinner-border spinner-border-sm text-primary" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-          <span>&nbsp;&nbsp;Loading courses...</span>
-        </ng-template>
-      </div>  
-    </div> -->
 
     <div class="form-group">
-        <label for="courses">Registered courses</label>
-        <div>
-          <div *ngIf="registeredCourses$ | async as registeredCourses; else loading">
-            <ng-container *ngFor="let registeredCourse of registeredCourses">
-              <p>
-                <span class="badge badge-primary">
-                  {{registeredCourse.course.courseCode}} {{registeredCourse.course.courseName}}
-                </span>
-              </p>
-            </ng-container>
-          </div>
-          <ng-template #loading>
-              <div class="spinner-border spinner-border-sm text-primary" role="status">
-                  <span class="sr-only">Loading...</span>
-                </div>
-            <span>&nbsp;&nbsp;Loading courses...</span>
-          </ng-template>
+      <label for="lastName">Last name</label>
+      <input type="text" class="form-control" id="lastName" placeholder="Lim" formControlName="lastName">
+    </div>
+
+    <div class="form-group">
+      <label for="courses">Registered courses</label>
+      <div>
+        <div *ngIf="registeredCourses; else loading">
+          <ng-container *ngFor="let registeredCourse of registeredCourses">
+            <p>
+              <span class="badge badge-primary">
+                {{registeredCourse.course.courseCode}} {{registeredCourse.course.courseName}}
+              </span>
+            </p>
+          </ng-container>
         </div>
+        
+        <ng-template #loading>
+          <div class="spinner-border spinner-border-sm text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <span>&nbsp;&nbsp;Loading courses...</span>
+        </ng-template>
       </div>
+    </div>
 
     <button type="submit" class="btn btn-primary">Update</button>
   </form>
