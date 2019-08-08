@@ -41,6 +41,7 @@
             </column>
         </createTable>
     </changeSet>
+
     <changeSet id="3" author="chunhoong">
         <createTable tableName="course_registries">
             <column name="id" type="varchar(36)">
@@ -67,8 +68,7 @@
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedColumnNames="id"
-                                 referencedTableName="students"
-        />
+                                 referencedTableName="students"/>
         <addForeignKeyConstraint baseColumnNames="course_id"
                                  baseTableName="course_registries"
                                  constraintName="fk_course_registries_course"
@@ -77,10 +77,9 @@
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedColumnNames="id"
-                                 referencedTableName="courses"
-        />
+                                 referencedTableName="courses"/>
     </changeSet>
 
-
+    <include file="20190808_insert_table.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
 
