@@ -4,6 +4,7 @@ import { CoursesService } from '../courses.service';
 import { Course } from '../course';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { StudentService } from '../student.service';
+import { Student } from '../student';
 
 @Component({
   selector: 'app-student-registration-page',
@@ -45,19 +46,24 @@ export class StudentRegistrationPage implements OnInit, OnDestroy {
       );
   }
 
-  onRegister() {
+  async onRegister() {
     if (this.studentForm.valid) {
       let firstName = this.studentForm.get('firstName').value;
       let lastName = this.studentForm.get('lastName').value;
-      this.registrationSubscription = this.studentSvc.registerStudent({ firstName, lastName })
-        .subscribe(
-          () => {
-            alert(`${firstName} is successfully registered`);
-          },
-          error => {
-            alert(error);
-          }
-        );
+      
+      try {
+        let s: Student = await this.studentSvc.registerStudent({ firstName, lastName }).toPromise();
+        console.log(`Student is successfully registered with id: ${s.studentId}`);
+        console.log(`Courses to register: ${JSON.stringify(this.coursesToBeRegistered)}`);
+        for (let i = 0; i < this.coursesToBeRegistered.length; i++) {
+          console.log(`Registering: ${this.coursesToBeRegistered[i]}`);
+          await this.courseSvc.registerCourse(this.coursesToBeRegistered[i], s.studentId).toPromise();
+        }
+        alert(`Registration complete`);
+      }
+      catch (e) {
+        alert(e);
+      }
     }
   }
 

@@ -26,4 +26,8 @@ export class CoursesService {
     return this.http.delete<void>(CoursesService.courseRegistriesBaseUrl + '?studentId=' + studentId)
   }
 
+  registerCourse(courseId: string, studentId: string) {
+    return this.http.post<void>(CoursesService.courseRegistriesBaseUrl, {courseId, studentId});
+  }
+
 }

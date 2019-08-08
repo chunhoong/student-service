@@ -65,6 +65,7 @@ export class DashboardPage implements OnInit, OnDestroy {
         .subscribe(
           () => {
             alert(`${student.firstName} and his/her related records is successfully removed`);
+            window.location.reload();
           },
           e => {
             alert(e);

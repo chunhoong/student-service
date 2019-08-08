@@ -22,7 +22,7 @@ export class StudentService {
   }
 
   registerStudent(student: Student) {
-    return this.http.post(StudentService.baseUrl, student);
+    return this.http.post<Student>(StudentService.baseUrl, student);
   }
 
   updateStudent(student: Student) {
